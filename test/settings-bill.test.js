@@ -1,10 +1,10 @@
 const assert = require('assert');
 
-const SettingsBill = require('../settings-bill');
+const SettingsBill = require('../test/setting-bill');
 
 describe('settings-bill', function(){
 
-    const settingsBill = SettingsBill();
+     settingsBill = SettingsBill();
 
     it('should be able to record calls', function(){
         settingsBill.recordAction('call');

@@ -24,7 +24,8 @@ app.get('/', function (req, res) {
 
     res.render('home', {
         setting: settingsBill.getSettings(),
-        totals: settingsBill.totals()
+        totals: settingsBill.totals(),
+        color: settingsBill.forColor()
 
         //key  settings  & totals together
 
