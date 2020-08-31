@@ -4,6 +4,16 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const SettingsBill = require('./settings-bill');
 
+const handlebarSetup = exphbs({
+    partialsDir: "./views/partials",
+    viewPath:  './views',
+    layoutsDir : './views/layouts'
+});
+
+app.engine('handlebars', handlebarSetup);
+app.set('view engine', 'handlebars');
+
+
 const settingsBill = SettingsBill();
 
 // parse application/x-www-form-urlencoded
@@ -11,9 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+// app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+// app.set('view engine', 'handlebars');
 
 app.use(express.static('public')); //enable your css
 

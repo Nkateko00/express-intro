@@ -101,7 +101,7 @@ module.exports = function SettingsBill() {
         return {
             smsTotals,
             callTotals,
-            grandTotals : Number(getTotal()).toFixed(2)
+            grandTotals 
 
         }
     }
