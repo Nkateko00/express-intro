@@ -4,7 +4,7 @@ const SettingsBill = require('../settings-bill');
 
 describe('settings-bill', function(){
 
-     settingsBill = SettingsBill();
+     const settingsBill = SettingsBill();
 
     it('should be able to record calls', function(){
         settingsBill.recordAction('call');
