@@ -3,7 +3,7 @@ module.exports = function SettingsBill() {
     let smsCost;
     let callCost;
     let warningLevel;
-    let criticalLevel; 
+    let criticalLevel;
 
     var smsTotals = 0;
     var callTotals = 0;
@@ -11,7 +11,7 @@ module.exports = function SettingsBill() {
 
     let actionList = [];
 
-    function setSettings (settings) {
+    function setSettings(settings) {
 
         console.log(settings);
 
@@ -22,7 +22,7 @@ module.exports = function SettingsBill() {
     }
 
     function getSettings
-    () {
+        () {
         return {
             smsCost,
             callCost,
@@ -32,33 +32,34 @@ module.exports = function SettingsBill() {
     }
 
     function recordAction(action) {
-        var cost = 0;
-        if (action === 'SMS'){
-         smsTotals += smsCost;
-         grandTotals += smsCost;
-         cost =  smsCost;
-          //adding onto the global variable "cost" in order to keep record in the list
+        if (!hasReachedCriticalLevel()) {
+            var cost = 0;
+            if (action === 'SMS') {
+                smsTotals += smsCost;
+                grandTotals += smsCost;
+                cost = smsCost;
+                //adding onto the global variable "cost" in order to keep record in the list
 
-        }
-        else if (action === 'Call'){
-            callTotals += callCost;
-            grandTotals += callCost;
-            cost = callCost ;
-            //adding onto the global variable "cost" in order to keep record in the list
-        }
+            }
+            else if (action === 'Call') {
+                callTotals += callCost;
+                grandTotals += callCost;
+                cost = callCost;
+                //adding onto the global variable "cost" in order to keep record in the list
+            }
 
-        actionList.push({
-            type: action,
-            cost,
-            timestamp: new Date()
-        });
+            actionList.push({
+                type: action,
+                cost,
+                timestamp: new Date()
+            });
+        }
     }
-
-    function actions(){
+    function actions() {
         return actionList;
     }
 
-    function actionsFor(type){
+    function actionsFor(type) {
         const filteredActions = [];
 
         // loop through all the entries in the action list 
@@ -101,31 +102,36 @@ module.exports = function SettingsBill() {
         return {
             smsTotals,
             callTotals,
-            grandTotals 
+            grandTotals
 
         }
     }
 
-    function hasReachedWarningLevel(){
-        const total = getTotal();
-        const reachedWarningLevel = total >= warningLevel 
+    function hasReachedWarningLevel() {
+        const total = grandTotal();
+        const reachedWarningLevel = total >= warningLevel
             && total < criticalLevel;
 
         return reachedWarningLevel;
     }
 
-    function hasReachedCriticalLevel(){
-        const total = getTotal();
+    function hasReachedCriticalLevel() {
+        const total = grandTotal();
         return total >= criticalLevel;
     }
-function forColor(){
-    if(hasReachedCriticalLevel()){
-        return danger ;
+    function forColor() {
+        if (hasReachedCriticalLevel()) {
+            console.log('hi danger')
+            return 'danger';
+        }
+        if (hasReachedWarningLevel()) {
+            console.log('hi warning')
+            return 'warning';
+        }
     }
-    if(hasReachedWarningLevel()){
-        return warning ;
+    function grandTotal(){
+        return grandTotals;
     }
-}
     return {
         setSettings,
         getSettings,
@@ -135,6 +141,7 @@ function forColor(){
         totals,
         forColor,
         getTotal,
+        grandTotal,
         hasReachedWarningLevel,
         hasReachedCriticalLevel
     }

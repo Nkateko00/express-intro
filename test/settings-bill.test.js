@@ -7,8 +7,8 @@ describe('settings-bill', function(){
      const settingsBill = SettingsBill();
 
     it('should be able to record calls', function(){
-        settingsBill.recordAction('call');
-        assert.equal(1, settingsBill.actionsFor('call').length);
+        settingsBill.recordAction('Call');
+        assert.equal(1, settingsBill.actionsFor('Call').length);
     });
 
     it('should be able to set the settings', function(){
@@ -38,12 +38,12 @@ describe('settings-bill', function(){
             criticalLevel: 40
         });
 
-        settingsBill.recordAction('call');
-        settingsBill.recordAction('sms');
+        settingsBill.recordAction('Call');
+        settingsBill.recordAction('SMS');
 
-        assert.equal(2.35, settingsBill.totals().smsTotal);
-        assert.equal(3.35, settingsBill.totals().callTotal);
-        assert.equal(5.70, settingsBill.totals().grandTotal);
+        assert.equal(2.35, settingsBill.totals().smsTotals);
+        assert.equal(3.35, settingsBill.totals().callTotals);
+        assert.equal(5.70, settingsBill.totals().grandTotals);
 
     });
 
@@ -56,14 +56,14 @@ describe('settings-bill', function(){
             criticalLevel: 40
         });
 
-        settingsBill.recordAction('call');
-        settingsBill.recordAction('call');
-        settingsBill.recordAction('sms');
-        settingsBill.recordAction('sms');
+        settingsBill.recordAction('Call');
+        settingsBill.recordAction('Call');
+        settingsBill.recordAction('SMS');
+        settingsBill.recordAction('SMS');
 
-        assert.equal(4.70, settingsBill.totals().smsTotal);
-        assert.equal(6.70, settingsBill.totals().callTotal);
-        assert.equal(11.40, settingsBill.totals().grandTotal);
+        assert.equal(4.70, settingsBill.totals().smsTotals);
+        assert.equal(6.70, settingsBill.totals().callTotals);
+        assert.equal(11.40, settingsBill.totals().grandTotals);
 
     });
 
@@ -76,10 +76,11 @@ describe('settings-bill', function(){
             criticalLevel: 10
         });
 
-        settingsBill.recordAction('call');
-        settingsBill.recordAction('sms');
+        settingsBill.recordAction('Call');
+        settingsBill.recordAction('SMS');
 
-        assert.equal(true, settingsBill.hasReachedWarningLevel());
+        assert.equal('warning', settingsBill.forColor());
+        
     });
 
     it('should know when critical level reached', function(){
@@ -91,11 +92,11 @@ describe('settings-bill', function(){
             criticalLevel: 10
         });
 
-        settingsBill.recordAction('call');
-        settingsBill.recordAction('call');
-        settingsBill.recordAction('sms');
-
-        assert.equal(true, settingsBill.hasReachedCriticalLevel());
+        settingsBill.recordAction('Call');
+        settingsBill.recordAction('Call');
+        settingsBill.recordAction('SMS');
+       
+        assert.equal('danger', settingsBill.forColor());
 
     });
 });
