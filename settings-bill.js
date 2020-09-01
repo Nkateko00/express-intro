@@ -99,6 +99,7 @@ module.exports = function SettingsBill() {
     }
 
     function totals() {
+       
         return {
             smsTotals,
             callTotals,
@@ -121,15 +122,13 @@ module.exports = function SettingsBill() {
     }
     function forColor() {
         if (hasReachedCriticalLevel()) {
-            console.log('hi danger')
             return 'danger';
         }
         if (hasReachedWarningLevel()) {
-            console.log('hi warning')
             return 'warning';
         }
     }
-    function grandTotal(){
+    function grandTotal() {
         return grandTotals;
     }
     return {

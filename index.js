@@ -3,6 +3,8 @@ let app = express();
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const SettingsBill = require('./settings-bill');
+const moment = require('moment');
+moment().format();
 
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
@@ -38,6 +40,7 @@ app.get('/', function (req, res) {
         totals: settingsBill.totals(),
         color: settingsBill.forColor()
 
+
         //key  settings  & totals together
 
     });
@@ -66,13 +69,27 @@ app.post('/action', function (req, res) {
 
 });
 app.get('/actions', function (req, res) {
-    res.render("actions", { actions: settingsBill.actions() });
 
-
+    var  allTheActions = settingsBill.actions();
+    for(var item of allTheActions){
+        item.ago = moment(item.timestamp).fromNow();
+    }
+    res.render("actions", {
+         actions: settingsBill.actions(),
+         actions : allTheActions
+    });
 });
 app.get('/actions/:actionType', function (req, res) {
     const actionType = req.params.actionType;
-    res.render("actions", { actions: settingsBill.actionsFor(actionType) });
+    var  allTheActions = settingsBill.actions();
+    for(var item of allTheActions){
+    item.ago = moment(item.timestamp).fromNow();
+    }
+    res.render("actions", { 
+        //actions: settingsBill.actions(),
+        actions: settingsBill.actionsFor(actionType),
+       // actions : allTheActions
+     });
 });
 
 
