@@ -5,7 +5,7 @@
   "main": "index.js",
   "directories": {
     "test": "test",
-    "start" : "node index.js"
+    "start": "node index.js"
   },
   "scripts": {
     "test": "mocha"
