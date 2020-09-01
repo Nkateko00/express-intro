@@ -32,6 +32,7 @@ module.exports = function SettingsBill() {
     }
 
     function recordAction(action) {
+        if(action){
         if (!hasReachedCriticalLevel()) {
             var cost = 0;
             if (action === 'SMS') {
@@ -47,6 +48,7 @@ module.exports = function SettingsBill() {
                 cost = callCost;
                 //adding onto the global variable "cost" in order to keep record in the list
             }
+        }
 
             actionList.push({
                 type: action,
