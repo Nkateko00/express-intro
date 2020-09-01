@@ -99,11 +99,11 @@ module.exports = function SettingsBill() {
     }
 
     function totals() {
-       
+
         return {
-            smsTotals,
-            callTotals,
-            grandTotals
+            smsTotals: smsTotal().toFixed(2),
+            callTotals: callTotal().toFixed(2),
+            grandTotals: grandTotal().toFixed(2)
 
         }
     }
@@ -131,6 +131,12 @@ module.exports = function SettingsBill() {
     function grandTotal() {
         return grandTotals;
     }
+    function smsTotal() {
+        return smsTotals;
+    }
+    function callTotal() {
+        return callTotals;
+    }
     return {
         setSettings,
         getSettings,
@@ -138,6 +144,8 @@ module.exports = function SettingsBill() {
         actions,
         actionsFor,
         totals,
+        smsTotal,
+        callTotal,
         forColor,
         getTotal,
         grandTotal,
