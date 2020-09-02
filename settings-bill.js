@@ -48,13 +48,14 @@ module.exports = function SettingsBill() {
                 cost = callCost;
                 //adding onto the global variable "cost" in order to keep record in the list
             }
-        }
 
             actionList.push({
                 type: action,
                 cost,
                 timestamp: new Date()
             });
+        }
+
         }
     }
     function actions() {

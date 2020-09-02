@@ -80,8 +80,8 @@ app.get('/actions', function (req, res) {
     });
 });
 app.get('/actions/:actionType', function (req, res) {
-    const actionType = req.params.actionType;
     var  allTheActions = settingsBill.actions();
+    const actionType = req.params.actionType;
     for(var item of allTheActions){
     item.ago = moment(item.timestamp).fromNow();
     }
