@@ -6,10 +6,14 @@ const SettingsBill = require('./settings-bill');
 const moment = require('moment');
 moment().format();
 
+
+
+
 const handlebarSetup = exphbs({
-    partialsDir: "./views/partials",
-    viewPath:  './views',
-    layoutsDir : './views/layouts'
+    // partialsDir: "./views/partials",
+    // viewPath:  './views',
+    // layoutsDir : './views/layouts'
+    defaultLayout: 'main'
 });
 
 app.engine('handlebars', handlebarSetup);
